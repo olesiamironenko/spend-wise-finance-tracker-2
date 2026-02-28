@@ -3,9 +3,15 @@ const { z } = require('zod');
 const emailField = z
   .string({ required_error: "Email is required" })
   .transform((val) => val.trim().toLowerCase())
+  .refine((val) => val.length > 0, { message: 'Email is required' })
   .refine((val) => z.email().safeParse(val).success, {
     message: "Please provide a valid email address"
   });
+
+const passwordField = z
+  .string({ required_error: 'Password is required' })
+  .min(6, 'Password must be at least 6 characters')
+  .max(100, 'Password must be at most 100 characters')
 
 const registerValidator = z.object({
   body: z
@@ -18,17 +24,11 @@ const registerValidator = z.object({
 
       email: emailField,
         
-      password: z
-        .string({ required_error: "Password is required" })
-        .min(6, "Password must be at least 6 characters")
-        .max(100, "Password must be at most 100 characters"),
+      password: passwordField,
 
-      confirmPassword: z
-        .string({ required_error: "Confirm Password is required" })
-        .min(6, "Confirm Password must be at least 6 characters")
-        .max(100, "Confirm Password must be at most 100 characters"),
+      confirmPassword: passwordField
     })
-    .refine(({ password, confirmPassword }, ctx) => {
+    .superRefine(({ password, confirmPassword }, ctx) => {
       if (password !== confirmPassword) {
         ctx.addIssue({
           code: "custom",
@@ -42,10 +42,7 @@ const registerValidator = z.object({
 const loginValidator = z.object({
   body: z.object({
     email: emailField,
-    password: z
-      .string({ required_error: "Password is required" })
-      .min(6, "Password must be at least 6 characters")
-      .max(100, "Password must be at most 100 characters"),
+    password: passwordField,
   }),
 });
 

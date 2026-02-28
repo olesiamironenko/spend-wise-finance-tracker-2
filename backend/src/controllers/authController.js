@@ -28,7 +28,7 @@ const register = async (req, res, next) => {
     if (err.code === 11000) { // Duplicate key error
       return res.status(409).json({ message: "Email is already registered" });
     }
-    next(err);
+    return next(err);
   }
 };
 
@@ -60,7 +60,7 @@ const login = async (req, res, next) => {
       }
     });
   } catch (err) {
-    next(err);
+    return next(err);
   }
 };
 
