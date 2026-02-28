@@ -20,5 +20,16 @@ export default defineConfig([
   },
   {
     ignores: ['node_modules', 'dist', 'build', 'coverage']
+  },
+  {
+    rules: {
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_'
+        }
+      ]
+    }
   }
 ])
