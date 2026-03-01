@@ -9,8 +9,8 @@ const { register, login } = require('../controllers/authController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 // Protected route example (JWT testing)
-router.get('/protected', authMiddleware, (req, res) => {
-    res.send('This is a protected route');
+router.get('/me', authMiddleware, (req, res) => {
+  res.status(200).json({ message: 'Authenticated user info', user: req.user });
 });
 
 // POST /api/auth/register - User registration
