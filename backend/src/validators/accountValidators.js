@@ -50,7 +50,7 @@ const updateAccountValidator = z.object({
   }),
 });
 
-const IDParamValidator = z.object({
+const accountIdParamValidator = z.object({
   params: z.object({
     accountId: objectIdField,
   }),
@@ -59,5 +59,5 @@ const IDParamValidator = z.object({
 module.exports = {
   createAccountValidator,
   updateAccountValidator,
-  IDParamValidator,
+  accountIdParamValidator,
 };
