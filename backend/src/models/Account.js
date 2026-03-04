@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ACCOUNT_TYPES = require('../constants/accountTypes');
 
 const AccountSchema = new mongoose.Schema(
   {
@@ -18,10 +19,7 @@ const AccountSchema = new mongoose.Schema(
     type: {
       type: String,
       required: [true, 'Account type is required'],
-      enum: {
-        values: ['debit', 'credit', 'savings', 'investment'],
-        message: '{VALUE} is not a valid account type. Valid types are: debit, credit, savings, investment',
-      },
+      enum: ACCOUNT_TYPES,
     },
     startingBalance: {
       type: Number,
