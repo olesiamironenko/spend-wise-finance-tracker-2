@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ACCOUNT_TYPES = require('../constants/accountTypes');
+const { ACCOUNT_TYPES } = require('../constants/accountTypes');
 
 const AccountSchema = new mongoose.Schema(
   {

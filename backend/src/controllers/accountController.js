@@ -44,23 +44,34 @@ const createAccount = async (req, res, next) => {
   }
 };
 
-// PUT /api/accounts/:id
+// PATCH /api/accounts/:id
 const updateAccount = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const allowedUpdates = ['name', 'type', 'startingBalance', 'currency'];
     const updates = req.validated?.body || req.body;
+
+    // Filter updates to only include allowed fields
+    const filteredUpdates = Object.fromEntries(
+      Object.entries(updates).filter(([key]) => allowedUpdates.includes(key))
+    );
 
     const account = await Account.findOneAndUpdate(
       { _id: id, user: req.user.userId },
-      updates,
-      { new: true, runValidators: true }
+      { $set: filteredUpdates },
+      { 
+        returnDocument: 'after', 
+        runValidators: true 
+      }
     );
 
     if (!account) {
       return res.status(404).json({ message: 'Account not found' });
     }
 
-    return res.status(200).json({ message: 'Account updated', account });
+    return res.status(200).json({ 
+      message: 'Account updated', 
+      account });
   }
   catch (err) {
     return next(err);

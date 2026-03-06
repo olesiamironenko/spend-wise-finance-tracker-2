@@ -24,7 +24,9 @@ const currencyField = z
   .string()
   .trim()
   .toUpperCase()
-  .length(3, 'Currency code must be exactly 3 characters');
+  .length(3, 'Currency code must be exactly 3 characters')
+  .optional()
+  .default('USD');
 
 const createAccountValidator = z.object({
   body: z.object({
@@ -37,7 +39,7 @@ const createAccountValidator = z.object({
 
 const updateAccountValidator = z.object({
   params: z.object({
-    accountId: objectIdField,
+    id: objectIdField,
   }),
   body: z.object({
     name: nameField.optional(),
@@ -52,7 +54,7 @@ const updateAccountValidator = z.object({
 
 const accountIdParamValidator = z.object({
   params: z.object({
-    accountId: objectIdField,
+    id: objectIdField,
   }),
 });
 
