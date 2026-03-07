@@ -31,7 +31,7 @@ const dateField = z.coerce.date({
   invalid_type_error: 'Invalid date format',
 });
 
-const createTransactionSchema = z.object({
+const createTransactionValidator = z.object({
   body: z
     .object({
       account: objectIdField,
@@ -70,7 +70,7 @@ const createTransactionSchema = z.object({
       }
 
       if (data.type === 'expense') {
-        if (data.category) {
+        if (!data.category) {
           ctx.addIssue({
             code: 'custom',
             path: ['category'],
@@ -86,7 +86,7 @@ const createTransactionSchema = z.object({
       }
 
       if (data.type === 'income') {
-        if (data.category) {
+        if (!data.category) {
           ctx.addIssue({
             code: 'custom',
             path: ['category'],
@@ -103,7 +103,7 @@ const createTransactionSchema = z.object({
     }),
 });
 
-const updateTransactionSchema = z.object({
+const updateTransactionValidator = z.object({
   params: z.object({
     id: objectIdField,
   }),
@@ -129,7 +129,7 @@ const transactionIdParamValidator = z.object({
 });
 
 module.exports = {
-  createTransactionSchema,
-  updateTransactionSchema,
+  createTransactionValidator,
+  updateTransactionValidator,
   transactionIdParamValidator,
 };
