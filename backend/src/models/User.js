@@ -26,7 +26,9 @@ const UserSchema = new mongoose.Schema(
       select: false // don't return password by default
     },
   },
-  { timestamps: true }
+  { timestamps: true, 
+    versionKey: false
+  }
 );
 
 // Hash the password before saving the user (only if the password is modified
