@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const { TRANSACTION_TYPES } = require('../constants/transactionTypes');
 const { TRANSACTION_CATEGORIES } = require('../constants/transactionCategories');
-const { minLength } = require('zod');
 
 const TransactionSchema = new mongoose.Schema(
   {
