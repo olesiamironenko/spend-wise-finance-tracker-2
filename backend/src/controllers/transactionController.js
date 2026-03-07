@@ -1,6 +1,5 @@
 const Transaction = require('../models/Transaction');
 const Account = require('../models/Account');
-const { tr } = require('zod/v4/locales');
 
 const getTransactions = async (req, res, next) => {
   try {
