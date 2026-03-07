@@ -30,7 +30,7 @@ const TransactionSchema = new mongoose.Schema(
     category: {
       type: String,
       enum: TRANSACTION_CATEGORIES,
-
+      required: false, // category is optional, but if provided must be valid
     },
     description: {
       type: String,
