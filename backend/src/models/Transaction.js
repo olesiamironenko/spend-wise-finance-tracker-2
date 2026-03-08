@@ -47,6 +47,11 @@ const TransactionSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Account',
     },
+    transferGroupId: {
+      type: String,
+      default: null,
+      index: true,
+    }
   },
   { 
     timestamps: true, 
