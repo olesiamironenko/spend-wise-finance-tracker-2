@@ -8,6 +8,7 @@ const errorHandler = require('./middleware/errorHandler');
 
 const authRouter = require('./routes/authRoutes');
 const accountRouter = require('./routes/accountRoutes');
+const transactionRouter = require('./routes/transactionRoutes');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.get('/api/health', (req, res) => {
 });
 app.use('/api/accounts', accountRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/transactions', transactionRouter);
 
 // error handling
 app.use(notFound);

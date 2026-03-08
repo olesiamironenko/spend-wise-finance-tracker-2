@@ -34,7 +34,10 @@ const AccountSchema = new mongoose.Schema(
       maxlength: [3, 'Currency code must be 3 characters'],
     },
   },
-  { timestamps: true }
+  { 
+    timestamps: true,
+    versionKey: false 
+  }
 );
 
 const Account = mongoose.model('Account', AccountSchema);
