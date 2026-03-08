@@ -43,6 +43,11 @@ const TransactionSchema = new mongoose.Schema(
       required: [true, 'Date is required'],
       default: Date.now,
     },
+    direction: {
+      type: String,
+      enum: ['in', 'out'],
+      default: null,
+    },
     transferToAccount: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Account',
