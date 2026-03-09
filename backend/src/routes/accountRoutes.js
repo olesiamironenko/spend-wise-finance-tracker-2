@@ -15,7 +15,8 @@ const {
   getAccountById,
   createAccount,
   updateAccount,
-  deleteAccount
+  deleteAccount,
+  getAccountSummary,
 } = require('../controllers/accountController');
 
 // Protect everything after this middleware
@@ -24,6 +25,9 @@ router.use(authMiddleware);
 // /api/accounts
 router.get('/', getAccounts);
 router.post('/', validate(createAccountValidator),createAccount);
+
+// GET /api/accounts/:id/summary
+router.get('/:id/summary', validate(accountIdParamValidator), getAccountSummary);
 
 // GET /api/accounts/:id
 router.get('/:id', validate(accountIdParamValidator), getAccountById);
