@@ -1,4 +1,5 @@
 const Account = require('../models/Account');
+const Transaction = require('../models/Transaction');
 
 // Get /api/accounts
 const getAccounts = async (req, res, next) => {
@@ -94,10 +95,78 @@ const deleteAccount = async (req, res, next) => {
   }
 };
 
+// Get api/accounts/:id/summary
+const getAccountSummary = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    
+    const account = await Account.findOne({ 
+      _id: id, 
+      user: req.user.userId 
+    });
+
+    if (!account) {
+      return res.status(404).json({ message: 'Account not found' });
+    }
+
+    const transactions = await Transaction.find({ 
+      account: id, 
+      user: req.user.userId 
+    });
+    
+    let incomeTotal = 0;
+    let expenseTotal = 0;
+    let transferInTotal = 0;
+    let transferOutTotal = 0;
+
+    for (const transaction of transactions) {
+      if (transaction.type === 'income') {
+        incomeTotal += transaction.amount;
+      } else if (transaction.type === 'expense') {
+        expenseTotal += transaction.amount;
+      } else if (transaction.type === 'transfer') {
+        if (transaction.direction === "in") {
+          transferInTotal += transaction.amount;
+        } else if (transaction.direction === "out") {
+          transferOutTotal += transaction.amount;
+        }
+      }
+    }
+    
+    const currentBalance =
+      account.startingBalance + 
+      incomeTotal - 
+      expenseTotal + 
+      transferInTotal - 
+      transferOutTotal;
+    
+    return res.status(200).json({
+      account: {
+        id: account._id,
+        name: account.name,
+        type: account.type,
+        currency: account.currency,
+      },
+      summary: {
+        startingBalance: account.startingBalance,
+        incomeTotal,
+        expenseTotal,
+        transferInTotal,
+        transferOutTotal,
+        currentBalance,
+        transactionCount: transactions.length,
+      },
+    });
+  } catch (err) {
+    return next(err);
+  }
+}
+
 module.exports = {
   getAccounts,
   getAccountById,
   createAccount,
   updateAccount,
   deleteAccount,
+  getAccountSummary,
 };
