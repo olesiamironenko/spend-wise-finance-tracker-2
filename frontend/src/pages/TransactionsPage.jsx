@@ -385,7 +385,14 @@ const TransactionsPage = () => {
                     </h3>
 
                     <p>
-                      Account: {transaction.account?.name || "Unknown"} •{" "}
+                      {transaction.type === "transfer" ? (
+                        transaction.direction === "out"
+                          ? `From: ${transaction.account?.name} → To: ${transaction.transferToAccount?.name}`
+                          : `To: ${transaction.account?.name} ← From: ${transaction.transferToAccount?.name}`
+                      ) : (
+                        `Account: ${transaction.account?.name}`
+                      )}
+                      {" • "}
                       {new Date(transaction.date).toLocaleDateString()}
                     </p>
 
