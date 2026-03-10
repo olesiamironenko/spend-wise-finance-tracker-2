@@ -1,0 +1,132 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-5);
+  background: var(--color-bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.auth-title {
+  margin: 0 0 var(--space-2);
+  font-size: 2rem;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+.auth-subtitle {
+  margin: 0 0 var(--space-5);
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.auth-title, 
+.auth-subtitle {
+  text-align: center;
+}
+
+.auth-form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.form-group {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.form-input,
+.auth-form input {
+  width: 100%;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #d0d7de;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  color: var(--color-text);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.form-input::placeholder,
+.auth-form input::placeholder {
+  color: #8a94a6;
+}
+
+.form-input:focus,
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.12);
+}
+
+.primary-button,
+.auth-form button {
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #ffffff;
+  padding: 0.9rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease,
+    background-color 0.2s ease;
+}
+
+.primary-button:hover,
+.auth-form button:hover {
+  opacity: 0.95;
+}
+
+.primary-button:active,
+.auth-form button:active {
+  transform: translateY(1px);
+}
+
+.primary-button:disabled,
+.auth-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error-message {
+  margin: 0;
+  color: var(--color-danger);
+  font-size: 0.95rem;
+}
+
+.auth-footer {
+  margin: var(--space-5) 0 0;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.auth-footer a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import client from "../api/client";
 import { useAuth } from "../hooks/useAuth";
-import './LoginPage.css'
+import '../styles/auth.css'
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const login = useAuth()
+  const { login } = useAuth()
 
   const [formData, setFormData] = useState({
     email: "",
