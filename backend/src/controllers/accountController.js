@@ -1,11 +1,33 @@
 const Account = require('../models/Account');
 const Transaction = require('../models/Transaction');
+const { calculateAccountSummary } = require('../utils/accountSummary')
 
 // Get /api/accounts
 const getAccounts = async (req, res, next) => {
   try {
     const accounts = await Account.find({ user: req.user.userId }).sort({ createdAt: -1 });
-    return res.status(200).json({ count: accounts.length, accounts });
+
+    const accountsWithSummaries = await Promise.all(
+      accounts.map(async (account) => {
+        const transactions = await Transaction.find({
+          account: account._id,
+          user: req.user.userId
+        })
+
+        const summary = calculateAccountSummary(account, transactions)
+
+        return {
+          ...account.toObject(),
+          summary
+        }
+      })
+    )
+
+    return res.status(200).json({
+      count: accountsWithSummaries.length,
+      accounts: accountsWithSummaries
+    })
+
   } catch (err) {
     return next(err);
   }
@@ -112,33 +134,9 @@ const getAccountSummary = async (req, res, next) => {
     const transactions = await Transaction.find({ 
       account: id, 
       user: req.user.userId 
-    });
+    }).select("type amount direction").lean();
     
-    let incomeTotal = 0;
-    let expenseTotal = 0;
-    let transferInTotal = 0;
-    let transferOutTotal = 0;
-
-    for (const transaction of transactions) {
-      if (transaction.type === 'income') {
-        incomeTotal += transaction.amount;
-      } else if (transaction.type === 'expense') {
-        expenseTotal += transaction.amount;
-      } else if (transaction.type === 'transfer') {
-        if (transaction.direction === "in") {
-          transferInTotal += transaction.amount;
-        } else if (transaction.direction === "out") {
-          transferOutTotal += transaction.amount;
-        }
-      }
-    }
-    
-    const currentBalance =
-      account.startingBalance + 
-      incomeTotal - 
-      expenseTotal + 
-      transferInTotal - 
-      transferOutTotal;
+    const summary = calculateAccountSummary(account, transactions);
     
     return res.status(200).json({
       account: {
@@ -147,15 +145,7 @@ const getAccountSummary = async (req, res, next) => {
         type: account.type,
         currency: account.currency,
       },
-      summary: {
-        startingBalance: account.startingBalance,
-        incomeTotal,
-        expenseTotal,
-        transferInTotal,
-        transferOutTotal,
-        currentBalance,
-        transactionCount: transactions.length,
-      },
+      summary,
     });
   } catch (err) {
     return next(err);
