@@ -1,0 +1,145 @@
+.accounts-page {
+  padding: var(--space-6) 0;
+}
+
+.accounts-header {
+  margin-bottom: var(--space-5);
+}
+
+.accounts-subtitle {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.accounts-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.account-form-card h2,
+.accounts-list-card h2 {
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+}
+
+.account-form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.form-group {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #d0d7de;
+  border-radius: var(--radius-md);
+  background: #fff;
+  color: var(--color-text);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.12);
+}
+
+.account-form-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.primary-button,
+.secondary-button,
+.danger-button {
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.secondary-button {
+  background: #e9eef7;
+  color: var(--color-text);
+}
+
+.danger-button {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.primary-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.success-message {
+  margin: 0;
+  color: #1b7f3b;
+  font-size: 0.95rem;
+}
+
+.accounts-list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-md);
+}
+
+.account-item h3 {
+  margin: 0 0 var(--space-2);
+}
+
+.account-item p {
+  margin: 0 0 var(--space-2);
+  color: var(--color-muted);
+}
+
+.account-balance {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.account-item-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .accounts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-item {
+    flex-direction: column;
+  }
+
+  .account-item-actions {
+    width: 100%;
+  }
+}
