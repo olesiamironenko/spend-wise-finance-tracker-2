@@ -1,0 +1,45 @@
+.account-detail-page {
+  padding: var(--space-6) 0;
+}
+
+.account-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.account-detail-subtitle {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.account-back-link {
+  text-decoration: none;
+}
+
+.account-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.summary-card h2 {
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  font-size: 1rem;
+}
+
+.summary-value {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.account-meta-card h2 {
+  margin-top: 0;
+}

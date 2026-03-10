@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import client from "../api/client";
+import { Link } from "react-router-dom";
 import "../styles/accounts.css";
 
 const initialFormData = {
@@ -255,7 +256,7 @@ const AccountsPage = () => {
               {accounts.map((account) => (
                 <article key={account._id} className="account-item">
                   <div className="account-item-main">
-                    <h3>{account.name}</h3>
+                    <h3><Link to={`/accounts/${account._id}`}>{account.name}</Link></h3>
                     <p>
                       {account.type} • {account.currency}
                     </p>
