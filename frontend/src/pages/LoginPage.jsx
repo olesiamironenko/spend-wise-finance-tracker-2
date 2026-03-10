@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import client from "../api/client";
 import { useAuth } from "../hooks/useAuth";
+import './LoginPage.css'
 
 const LoginPage = () => {
   const navigate = useNavigate();
