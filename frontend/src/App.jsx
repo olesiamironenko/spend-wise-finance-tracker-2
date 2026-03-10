@@ -5,6 +5,7 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./layouts/AppLayout";
+import AccountsPage from "./pages/AccountsPage";
 
 function App() {
   return (
@@ -22,7 +23,12 @@ function App() {
               </ProtectedRoute>
             } 
           >
-            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/dashboard" element={
+              <DashboardPage />
+            } />
+            <Route path="/accounts" element={
+              <AccountsPage />
+            } />
           </Route>
 
           {/* Default redirect */}
