@@ -1,6 +1,6 @@
 const { z } = require('zod');
 const { TRANSACTION_TYPES } = require('../constants/transactionTypes');
-const { TRANSACTION_CATEGORIES, EXPENSE_CATEGORIES, INCOME_CATEGORIES } = require('../constants/transactionCategories');
+const { EXPENSE_CATEGORIES, INCOME_CATEGORIES } = require('../constants/transactionCategories');
 
 const objectIdField = z
   .string({ required_error: 'ID is required' })
@@ -17,7 +17,7 @@ const typeField = z.enum(TRANSACTION_TYPES, {
   required_error: 'Transaction type is required',
 });
 
-const categoryField = z.enum(TRANSACTION_CATEGORIES).optional()
+const categoryField = z.string().optional()
 
 const descriptionField = z
   .string()
@@ -43,7 +43,7 @@ const createTransactionValidator = z.object({
       transferToAccount: objectIdField.optional(),
     })
     .superRefine((data, ctx) => {
-      if (data.type === 'transfer') {
+      if (data.type === 'transfer' && data.category) {
         if (!data.transferToAccount) {
           ctx.addIssue({
             code: 'custom',
@@ -80,7 +80,7 @@ const createTransactionValidator = z.object({
           ctx.addIssue({
             code: 'custom',
             path: ['category'],
-            message: 'Expense category must be one of: ' + EXPENSE_CATEGORIES.join(', '),
+            message: 'Invalid expense category',
           });
         }
       }
@@ -96,9 +96,17 @@ const createTransactionValidator = z.object({
           ctx.addIssue({
             code: 'custom',
             path: ['category'],
-            message: 'Income category must be one of: ' + INCOME_CATEGORIES.join(', '),
+            message: 'Invalid income category',
           });
         }
+      }
+
+      if (data.type === 'transfer' && data.category) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['category'],
+          message: 'Transfer transactions cannot have category',
+        });
       }
     }),
 });
