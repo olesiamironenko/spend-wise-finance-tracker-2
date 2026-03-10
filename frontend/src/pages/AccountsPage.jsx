@@ -261,7 +261,11 @@ const AccountsPage = () => {
                       {account.type} • {account.currency}
                     </p>
                     <p className="account-balance">
-                      Starting balance: {account.startingBalance}
+                      Current balance:{" "}
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: account.currency || "USD",
+                      }).format(account.summary?.currentBalance)}
                     </p>
                   </div>
 
