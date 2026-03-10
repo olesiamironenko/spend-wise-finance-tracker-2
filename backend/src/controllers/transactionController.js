@@ -6,8 +6,8 @@ const getTransactions = async (req, res, next) => {
   try {
     const transactions = await Transaction.find({ user: req.user.userId })
       .sort({ date: -1, createdAt: -1 }) 
-      .populate('account', 'name type')
-      .populate('transferToAccount', 'name type');
+      .populate('account', 'name type currency')
+      .populate('transferToAccount', 'name type currency');
 
     return res.status(200).json({
      count: transactions.length, 
@@ -26,8 +26,8 @@ const getTransactionById = async (req, res, next) => {
       _id: id, 
       user: req.user.userId 
     })
-    .populate('account', 'name type')
-    .populate('transferToAccount', 'name type');
+    .populate('account', 'name type currency')
+    .populate('transferToAccount', 'name type currency');
 
     if (!transaction) {
       return res.status(404).json({ message: 'Transaction not found' });
@@ -76,7 +76,7 @@ const createTransaction = async (req, res, next) => {
 
       const transferGroupId = crypto.randomUUID();
 
-      const transactions = await Transaction.insertMany([
+      const createdTransactions = await Transaction.insertMany([
         {
           user: req.user.userId,
           account,
@@ -100,6 +100,15 @@ const createTransaction = async (req, res, next) => {
           transferGroupId
         }
       ]);
+
+      const transactionIds = createdTransactions.map((transaction) => transaction._id);
+
+      const transactions = await Transaction.find({
+        _id: { $in: transactionIds }
+      })
+        .sort({ direction: 1 })
+        .populate('account', 'name type currency')
+        .populate('transferToAccount', 'name type currency');
 
       return res.status(201).json({
         message: 'Transfer transactions created',

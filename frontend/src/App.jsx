@@ -6,6 +6,8 @@ import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./layouts/AppLayout";
 import AccountsPage from "./pages/AccountsPage";
+import TransactionsPage from "./pages/TransactionsPage";
+import AccountDetailPage from "./pages/AccountDetailPage";
 
 function App() {
   return (
@@ -28,6 +30,12 @@ function App() {
             } />
             <Route path="/accounts" element={
               <AccountsPage />
+            } />
+            <Route path="/transactions" element={
+              <TransactionsPage />
+            } />
+            <Route path="/accounts/:id" element={
+              <AccountDetailPage />
             } />
           </Route>
 
