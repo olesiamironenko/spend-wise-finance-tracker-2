@@ -1,9 +1,9 @@
 # SpendWise – Personal Finance Tracker
 
-![Node](https://img.shields.io/badge/node.js-18+-green)
-![React](https://img.shields.io/badge/react-19-blue)
-![MongoDB](https://img.shields.io/badge/mongodb-database-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
+[![Node](https://img.shields.io/badge/node.js-18+-green)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/react-19-blue)](https://react.dev/)
+[![MongoDB](https://img.shields.io/badge/mongodb-database-green)](https://mongodb.com/)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 SpendWise is a full-stack personal finance tracking application built with **Node.js, Express, MongoDB, and React**.  
 
