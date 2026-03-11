@@ -138,3 +138,73 @@ spend-wise-finance-tracker-2
 git clone https://github.com/yourusername/spend-wise-finance-tracker.git
 cd spend-wise-finance-tracker
 ```
+### 2. Setup Backend
+```
+cd backend
+npm install
+```
+Create .env file:
+```
+PORT=5001
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret
+JWT_EXPIRES_IN=1d
+CLIENT_URL=http://localhost:5173
+```
+Run backend:
+```
+npm run dev
+```
+### 3. Setup Frontend
+```
+cd frontend
+npm install
+```
+Create .env file:
+```
+VITE_API_URL=http://localhost:5001/api
+```
+Run frontend:
+```
+npm run dev
+```
+# Database Seed (Demo Data)
+Populate the database with demo accounts and transactions.
+```
+cd backend
+npm run seed
+```
+Demo user credentials:
+```
+email: bill@spendwise.com
+password: secret4321
+```
+# API Endpoints
+### Authentication
+```
+POST /api/auth/register
+POST /api/auth/login
+```
+### Accounts
+```
+GET    /api/accounts
+POST   /api/accounts
+GET    /api/accounts/:id
+PATCH  /api/accounts/:id
+DELETE /api/accounts/:id
+GET    /api/accounts/:id/summary
+```
+### Transactions
+```
+GET    /api/transactions
+POST   /api/transactions
+GET    /api/transactions/:id
+PATCH  /api/transactions/:id
+DELETE /api/transactions/:id
+```
+### Reports
+```
+GET /api/reports/expenses-by-category
+GET /api/reports/monthly-expenses-trend
+GET /api/reports/income-vs-expenses
+```
