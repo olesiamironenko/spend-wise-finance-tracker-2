@@ -220,6 +220,8 @@ GET /api/reports/income-vs-expenses
 
 # License
 
+MIT License
+
 # Author
 
 Olesia Mironenko
