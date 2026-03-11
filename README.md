@@ -75,7 +75,7 @@ API --> Auth
 API --> DB
 DB --> API
 API --> Frontend
-Frontend --> User
+Frontend --> User```
 
 # Tech Stack
 
