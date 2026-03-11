@@ -75,7 +75,9 @@ API --> Auth
 API --> DB
 DB --> API
 API --> Frontend
-Frontend --> User```
+Frontend --> User
+
+```
 
 # Tech Stack
 
@@ -100,3 +102,30 @@ Frontend --> User```
 - Prettier
 - dotenv
 - Postman (API testing)
+
+# Project Structure
+
+spend-wise-finance-tracker-2
+│
+├── backend
+│   ├── src
+│   │   ├── controllers
+│   │   ├── models
+│   │   ├── routes
+│   │   ├── middleware
+│   │   ├── validators
+│   │   ├── constants
+│   │   ├── config
+│   │   └── scripts
+│   │       └── seed.js
+│   └── package.json
+│
+├── frontend
+│   ├── src
+│   │   ├── pages
+│   │   ├── components
+│   │   ├── context
+│   │   ├── hooks
+│   │   ├── api
+│   │   └── styles
+│   └── package.json
