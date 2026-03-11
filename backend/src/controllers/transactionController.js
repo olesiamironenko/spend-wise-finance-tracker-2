@@ -117,7 +117,7 @@ const createTransaction = async (req, res, next) => {
       });
     }
 
-    const transaction = await Transaction.create({
+    const createdTransaction = await Transaction.create({
       user: req.user.userId,
       account,
       type,
@@ -126,6 +126,10 @@ const createTransaction = async (req, res, next) => {
       description,
       date
     });
+
+    const transaction = await Transaction.findById(createdTransaction._id)
+      .populate("account", "name type currency")
+      .populate("transferToAccount", "name type currency");
 
     return res.status(201).json({ 
       message: 'Transaction created',
