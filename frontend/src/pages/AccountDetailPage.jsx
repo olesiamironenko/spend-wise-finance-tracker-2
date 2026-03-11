@@ -3,6 +3,12 @@ import { Link, useParams } from "react-router-dom";
 import client from "../api/client";
 import "../styles/account-detail.css";
 
+const formatMoney = (amount, currency = "USD") =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+  }).format(Number(amount) || 0);
+
 const AccountDetailPage = () => {
   const { id } = useParams();
 
@@ -11,27 +17,29 @@ const AccountDetailPage = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchAccountData = async () => {
-    try {
-      setError("");
-      setIsLoading(true);
-
-      const [accountRes, summaryRes] = await Promise.all([
-        client.get(`/accounts/${id}`),
-        client.get(`/accounts/${id}/summary`),
-      ]);
-
-      setAccount(accountRes.data.account);
-      setSummary(summaryRes.data.summary);
-    } catch (err) {
-      setError(err.response?.data?.message || "Failed to load account details.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchAccountData();
+    const fetchAccountDetails = async () => {
+      try {
+        setError("");
+        setIsLoading(true);
+
+        const [accountResponse, summaryResponse] = await Promise.all([
+          client.get(`/accounts/${id}`),
+          client.get(`/accounts/${id}/summary`),
+        ]);
+
+        setAccount(accountResponse.data.account);
+        setSummary(summaryResponse.data.summary);
+      } catch (err) {
+        setError(
+          err.response?.data?.message || "Failed to load account details."
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAccountDetails();
   }, [id]);
 
   if (isLoading) {
@@ -46,12 +54,22 @@ const AccountDetailPage = () => {
     return (
       <div className="container account-detail-page">
         <p className="error-message">{error}</p>
+        <Link to="/accounts" className="secondary-button back-link">
+          Back to Accounts
+        </Link>
       </div>
     );
   }
 
   if (!account || !summary) {
-    return null;
+    return (
+      <div className="container account-detail-page">
+        <p className="error-message">Account details are unavailable.</p>
+        <Link to="/accounts" className="secondary-button back-link">
+          Back to Accounts
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -72,32 +90,34 @@ const AccountDetailPage = () => {
       <div className="account-summary-grid">
         <div className="card summary-card">
           <h2>Current Balance</h2>
-          <p className="summary-value">{summary.currentBalance}</p>
+          <p className="summary-value">{formatMoney(summary.currentBalance, account.currency)}</p>
         </div>
 
         <div className="card summary-card">
           <h2>Starting Balance</h2>
-          <p className="summary-value">{summary.startingBalance}</p>
+          <p className="summary-value">{formatMoney(summary.startingBalance, account.currency)}</p>
         </div>
 
         <div className="card summary-card">
           <h2>Total Income</h2>
-          <p className="summary-value">{summary.incomeTotal}</p>
+          <p className="summary-value">
+            {formatMoney(summary.incomeTotal, account.currency)}
+          </p>
         </div>
 
         <div className="card summary-card">
           <h2>Total Expenses</h2>
-          <p className="summary-value">{summary.expenseTotal}</p>
+          <p className="summary-value">{formatMoney(summary.expenseTotal, account.currency)}</p>
         </div>
 
         <div className="card summary-card">
           <h2>Transfer In</h2>
-          <p className="summary-value">{summary.transferInTotal}</p>
+          <p className="summary-value">{formatMoney(summary.transferInTotal, account.currency)}</p>
         </div>
 
         <div className="card summary-card">
           <h2>Transfer Out</h2>
-          <p className="summary-value">{summary.transferOutTotal}</p>
+          <p className="summary-value">{formatMoney(summary.transferOutTotal, account.currency)}</p>
         </div>
       </div>
 
