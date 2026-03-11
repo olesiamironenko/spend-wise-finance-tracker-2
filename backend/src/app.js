@@ -9,6 +9,7 @@ const errorHandler = require('./middleware/errorHandler');
 const authRouter = require('./routes/authRoutes');
 const accountRouter = require('./routes/accountRoutes');
 const transactionRouter = require('./routes/transactionRoutes');
+const dashboardRouter = require("./routes/dashboardRoutes");
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/accounts', accountRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/transactions', transactionRouter);
+app.use("/api/dashboard", dashboardRouter);
 
 // error handling
 app.use(notFound);
