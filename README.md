@@ -209,6 +209,17 @@ GET /api/reports/monthly-expenses-trend
 GET /api/reports/income-vs-expenses
 ```
 # Screenshots
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Accounts
+![Accounts](screenshots/accounts.png)
+
+### Transactions
+![Transactions](screenshots/transactions.png)
+
+### Reports
+![Reports](screenshots/reports.png)
 
 # Future Improvements
 - Budget tracking
