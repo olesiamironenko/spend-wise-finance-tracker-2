@@ -105,6 +105,7 @@ Frontend --> User
 
 # Project Structure
 
+```
 spend-wise-finance-tracker-2
 │
 ├── backend
@@ -129,3 +130,4 @@ spend-wise-finance-tracker-2
 │   │   ├── api
 │   │   └── styles
 │   └── package.json
+```
