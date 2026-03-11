@@ -8,6 +8,7 @@ import AppLayout from "./layouts/AppLayout";
 import AccountsPage from "./pages/AccountsPage";
 import TransactionsPage from "./pages/TransactionsPage";
 import AccountDetailPage from "./pages/AccountDetailPage";
+import ReportsPage from "./pages/ReportsPage";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
             <Route path="/accounts/:id" element={
               <AccountDetailPage />
             } />
+            <Route path="/reports" element={<ReportsPage />} />
           </Route>
 
           {/* Default redirect */}
