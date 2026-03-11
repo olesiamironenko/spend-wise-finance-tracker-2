@@ -76,3 +76,27 @@ API --> DB
 DB --> API
 API --> Frontend
 Frontend --> User
+
+# Tech Stack
+
+### Backend
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Zod validation
+- bcrypt password hashing
+
+### Frontend
+- React
+- Vite
+- React Router
+- Axios
+- Recharts (for reports and charts)
+
+### Other Tools
+- ESLint
+- Prettier
+- dotenv
+- Postman (API testing)
