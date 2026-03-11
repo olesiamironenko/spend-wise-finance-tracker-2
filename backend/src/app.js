@@ -10,6 +10,7 @@ const authRouter = require('./routes/authRoutes');
 const accountRouter = require('./routes/accountRoutes');
 const transactionRouter = require('./routes/transactionRoutes');
 const dashboardRouter = require("./routes/dashboardRoutes");
+const reportRouter = require("./routes/reportRoutes");
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use('/api/accounts', accountRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/transactions', transactionRouter);
 app.use("/api/dashboard", dashboardRouter);
+app.use("/api/reports", reportRouter);
 
 // error handling
 app.use(notFound);
