@@ -208,3 +208,21 @@ GET /api/reports/expenses-by-category
 GET /api/reports/monthly-expenses-trend
 GET /api/reports/income-vs-expenses
 ```
+# Screenshots
+
+# Future Improvements
+- Budget tracking
+- Recurring transactions
+- Multi-currency support
+- Export reports (CSV / PDF)
+- Dark mode
+- Mobile responsive UI improvements
+
+# License
+
+# Author
+
+Olesia Mironenko
+
+GitHub:
+https://github.com/olesiamironenko
