@@ -131,3 +131,10 @@ spend-wise-finance-tracker-2
 │   │   └── styles
 │   └── package.json
 ```
+
+# Installation
+### 1. Clone the repository
+```
+git clone https://github.com/yourusername/spend-wise-finance-tracker.git
+cd spend-wise-finance-tracker
+```
